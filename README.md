@@ -1,3 +1,5 @@
+🇬🇧 English | [🇷🇺 Русский](README.ru.md)
+
 # Healthy Clinic Flask Project
 
 A private clinic web application developed in Python using Flask as a final project for the first year of college.
