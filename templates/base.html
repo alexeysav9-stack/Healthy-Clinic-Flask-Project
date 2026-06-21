@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='icons/just-logo-for-light.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.flash').forEach(el => {
+            el.style.opacity = '0';
+
+            setTimeout(() => {
+                el.remove();
+            }, 500);
+        });
+    }, 5000);
+</script>
+<body>
+    <header>
+        
+        <div class="left_nav">
+            <a href="/" title="На главную">
+                <img class="cross_icon" src="{{ url_for('static', filename='icons/just-logo-for-light.png') }}" alt="icon">
+            </a>
+            
+            <h3 class="nav_text1" title="Телефон горячей линии">+7(812)-444-22-22</h3>
+        </div>
+        <div class="nav">
+            <a href="{{ url_for('contacts') }}" title="Вызвать врача">Контакты</a>
+            <a href="{{ url_for('doctors') }}">Наши специалисты</a>
+            <a href="{{ url_for('about') }}">О нас</a>
+        </div>
+        <div class="login_header">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="log_nav_link">
+                    <div class="log_nav1 out" title="Выйти">Выйти</div>
+                </a>
+                
+                {% if current_user.role == 'admin' %}
+                    <a href="{{ url_for('admin') }}" class="log_nav_link">
+                        <div class="log_nav2">Админ-панель</div>
+                    </a>
+                
+                {% else %}
+                    <a href="{{ url_for('profile') }}" class="log_nav_link">
+                        <div class="log_nav2">Личный кабинет</div>
+                    </a>
+            {% endif %}
+            {% else %}
+                <a href="{{ url_for('register') }}" class="log_nav_link">
+                    <div class="log_nav1">Зарегистрироваться</div>
+                </a>
+                <a href="{{ url_for('login') }}" class="log_nav_link">
+                    <div class="log_nav2">Войти</div>
+                </a>
+            {% endif %}
+        </div>
+    </header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="content {% block content_class %}{% endblock %}"  id="to_top">
+        {% block content %}{% endblock %}
+    </div>
+    {% if request.endpoint == 'index' %}
+        <div class="news">
+            {% block news %}{% endblock %}
+        </div>
+    {% endif %}
+    <footer>
+        <a href="#to_top">
+            <img src="{{ url_for('static', filename='icons/Logo for dark.png') }}" alt="" class="footer-logo">
+        </a>
+        <p>
+            info@healthy.com   
+            +7(812)-444-22-22
+        </p>
+        <p>
+            <a href="https://www.youtube.com" class="footer-a">YouTube</a>
+            <a href="https://www.instagram.com" class="footer-a">Instagram</a>
+            <a href="https://web.telegram.org/k/" class="footer-a">Telegram</a>
+            <a href="https://www.facebook.com" class="footer-a">Facebook</a>
+            <a href="https://www.x.com" class="footer-a">X</a>
+        </p>
+    </footer>
+</body>
+</html>

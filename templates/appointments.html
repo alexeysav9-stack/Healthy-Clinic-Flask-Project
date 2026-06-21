@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Healthy | Мои записи{% endblock %}
+
+{% block content_class %}appoinments{% endblock %}
+
+{% block content %}
+<h1 class="appointments_h1">Личный кабинет пользователя {{ current_user.first_name }} {{ current_user.last_name }}</h1>
+<h2 class="appointments_h1">Ваши записи:</h2>
+<div class="all_cards">
+{% if appointments %}
+{% for appointment in appointments %}
+            <div class="card-body">
+                <div class="main-card-body">
+                    <div class="card-status">
+                        <h5 class="card-title">
+                            {{ appointment.doctor.user.last_name }} {{ appointment.doctor.user.first_name }}
+                            </h5>
+                        {% if appointment.status == 'pending' %}
+                            <span class="status pending">Ожидает</span>
+                        {% elif appointment.status == 'approved' %}
+                            <span class="status approved">Подтверждена</span>
+                        {% elif appointment.status == 'rejected' %}
+                            <span class="status rejected">Отклонена</span>
+                        {% endif %}
+                    </div>
+                    
+                    <p class="card-text">
+                        <b>Специализация:</b> {{ appointment.doctor.specialization }}
+                    </p>
+                    <p class="card-text">
+                        <b>Дата:</b> {{ appointment.date.strftime('%d.%m.%Y') }}
+                    </p>
+                    <p class="card-text">
+                        <b>Время:</b> {{ appointment.time.strftime('%H:%M') }}
+                    </p>
+                    {% if appointment.comment %}
+                        <p class="card-text">
+                            <b>Комментарий:</b> {{ appointment.comment }}
+                        </p>
+                {% endif %}
+                </div>
+                
+            </div>
+            {% endfor %}
+            
+            {% else %}
+            <p class="no_appointments">У вас пока нет записей к врачам.</p>
+            {% endif %}
+</div>
+{% endblock %}

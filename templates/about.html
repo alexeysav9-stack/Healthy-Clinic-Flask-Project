@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Healthy Clinic | О нас{% endblock %}
+
+{% block content_class %}main{% endblock %}
+
+
+{% block content %}
+<div class="about">
+    <h1 class="title">О нас</h1>
+    <p>Healthy Clinic — это сеть современных частных клиник, объединённых едиными стандартами качества и заботы о пациентах. Мы создаём систему, в которой медицинская помощь доступна, удобна и прозрачна на каждом этапе — от записи до лечения.</p>
+    <p>В нашей сети работают опытные специалисты, используются актуальные методы диагностики и лечения, а каждый пациент получает персональный подход вне зависимости от выбранного филиала.</p>
+    <p>Наша цель — не просто лечить, а выстраивать долгосрочное здоровье. Мы развиваем единую экосистему медицинских услуг, где вы можете быть уверены в качестве и сервисе в любой клинике сети.</p>
+    <p>Мы постоянно внедряем новые технологии и совершенствуем процессы, чтобы медицина становилась быстрее, точнее и комфортнее для вас.</p>
+</div>
+<div class="branches">
+    <h1 class="title">Наши филиалы</h1>
+    <div class="branches_list">
+        {% for branch in branches %}
+            <div class="branch_card">
+                <img src="{{ url_for('static', filename='uploads/' + branch.branch_photo) }}" alt="{{ branch.name }}" class="branch_photo">
+                <h3  class="branch-title">{{ branch.name }}</h3>
+                <p class="branch-text"><strong>Адрес:</strong> {{ branch.address }}</p>
+                <p class="branch-text"><strong>Телефон:</strong> {{ branch.phone_number }}</p>
+                <p class="branch-text"><strong>Email:</strong> {{ branch.email }}</p>
+                <p class="branch-text"><strong>Рабочие часы:</strong> {{ branch.working_hours }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

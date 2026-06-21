@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Healthy | Новости и статьи{% endblock %}
+
+
+{% block content_class %}admin-content{% endblock %}
+
+{% block content %}
+    <h1>Статьи</h1>
+    <p class="p-top-post">Здесь вы можете просматривать все статьи, новости и объявления, написанные администрацией и нашими медицинскими специалистами.</p>
+    
+    
+    <div class="posts-list">
+        <hr>
+        {% for post in posts %}
+            <div class="full-news">
+            <div class="index-news">
+                <a href="{{ url_for('post_detail', post_id=post.id) }}"><h2>{{ post.title }}</h2></a>
+                <a href="{{ url_for('post_detail', post_id=post.id) }}"><p>{{ post.content[:400] }}...</p></a>
+                <a href="{{ url_for('post_detail', post_id=post.id) }}">Читать</a>
+                
+                
+            </div>
+            {% if post.image %}
+                <div class="div-index-post-image">
+                    <img src="{{ url_for('static', filename='uploads/' + post.image) }}" class="index-post-image">
+                </div>
+            {% endif %}
+            
+        </div>
+        <hr>
+        {% else %}
+            <p>Пока нет статей для отображения.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

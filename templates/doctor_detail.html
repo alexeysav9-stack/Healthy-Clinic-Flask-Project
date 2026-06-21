@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Healthy | {{ doctor.user.last_name }} {{ doctor.user.first_name }}{% endblock %}
+
+{% block content_class %}doc_det_page{% endblock %}
+{% block content %}
+<a href="{{ url_for('doctors') }}" class="btn btn-secondary">Все врачи</a>
+<div class="doc_det">
+
+    <div class="doc_det_photo_div">
+        {% if doctor.photo %}
+            <img src="{{ url_for('static', filename='uploads/' + doctor.photo) }}" class="det_doc_photo">
+        {% else %}
+            <img src="{{ url_for('static', filename='uploads/default.png') }}" class="det_doc_photo">
+        {% endif %}
+    </div>
+    <div class="doc_detail_text">
+        <div class="doc_text_info">
+            <h1>{{ doctor.user.last_name }} {{ doctor.user.first_name }} {{ doctor.user.patronymic }}</h1>
+
+            <p><b>Специализация:</b> {{ doctor.specialization }}</p>
+            <p><b>Описание:</b> {{ doctor.description }}</p>
+            <p><b>Email:</b> {{ doctor.user.email }}</p>
+            {% if current_user.is_authenticated and current_user.role == 'patient' %}
+                <a href="{{ url_for('book_appointment', doctor_id=doctor.id) }}" class="btn btn-primary">
+                    Записаться
+                </a>
+                
+                
+
+            {% endif %}
+            {% if not current_user.is_authenticated %}
+                <p>Зарегестрируйтесь или войдите в аккаунт для записи к этому врачу</p>
+            {% endif %}
+        </div>
+        {% if current_user.is_authenticated and current_user.role == 'admin' %}
+            <div class="admin_edit_doc">
+                <a href="{{ url_for('edit_doctor', doctor_id=doctor.id) }}" class="btn btn-warning">
+                    Редактировать
+                </a>
+
+                <form action="{{ url_for('delete_doctor', doctor_id=doctor.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Удалить врача?')">
+                        Удалить
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

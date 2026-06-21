@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Healthy Clinic | {{ post.title }}{% endblock %}
+
+{% block content_class %}post-content{% endblock %}
+
+{% block content %}
+    {% if post.image %}
+        <div class="div-post-image">
+            <img src="{{ url_for('static', filename='uploads/' + post.image) }}" class="post-image">
+        </div>
+    {% endif %}
+    <div class="post-text">
+        <div class="post-info">
+            <p>Автор: {{ post.author_name }}</p>
+            <p>Дата публикации: {{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+        </div>
+        
+        <div class="post-title">
+            <h1>{{ post.title }}</h1>
+        </div>
+        <div class="post-p">
+            <p>{{ post.content }}</p>
+        </div>
+    </div>
+    
+{% endblock %}

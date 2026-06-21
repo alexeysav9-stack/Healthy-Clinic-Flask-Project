@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Healthy | Главная
+{% endblock %}
+
+{% block content_class %}main{% endblock %}
+
+{% block content %}
+<div class="div_img">
+    <img src="static/images/Clinic 1.jpeg" alt="building image" class="bld_img">
+    <div class="preview">
+        <div class="preview-text-logo">
+            <div class="preview-text">
+                <h1 class="main_title">Healthy Clinic</h1><br>
+                <h2 class="main_title">Cеть частных клиник</h2>
+            </div>
+            <img src="{{ url_for('static', filename='icons/Logo for light.png') }}" alt="" class="preview-logo">
+        </div>
+        
+            <div class="main-menu">
+                <a href="#news" class="btn main-btn">Новости</a>
+                <a href="#about" class="btn main-btn">О нас</a>
+                <a href="{{ url_for('contacts') }}" class="btn main-btn">Контакты</a>
+                <a href="{{ url_for('doctors') }}" class="btn main-btn main-btn-wide">Записаться на прием</a>
+            </div>
+            
+        
+    </div>
+</div>
+<div class="about" id="about">
+    <h1 class="main-h1">О нашей клинике</h1>
+    <p>Healthy Clinic — это сеть современных частных клиник, объединённых едиными стандартами качества и заботы о пациентах. Мы создаём систему, в которой медицинская помощь доступна, удобна и прозрачна на каждом этапе — от записи до лечения.</p>
+    <p>В нашей сети работают опытные специалисты, используются актуальные методы диагностики и лечения, а каждый пациент получает персональный подход вне зависимости от выбранного филиала.</p>
+    <p>Наша цель — не просто лечить, а выстраивать долгосрочное здоровье. Мы развиваем единую экосистему медицинских услуг, где вы можете быть уверены в качестве и сервисе в любой клинике сети.</p>
+    <p>Мы постоянно внедряем новые технологии и совершенствуем процессы, чтобы медицина становилась быстрее, точнее и комфортнее для вас.</p>
+    <a href="{{ url_for('about') }}">Подробнее</a>
+</div>
+
+<div class="why-us">
+    <h1 class="main-h1">Почему выбирают нас?</h1>
+
+    <div class="advantages">
+        <div class="advantage">
+            <img src="{{ url_for('static', filename='images/operation-office.jpg') }}" alt="" class="advantage-img">
+            <h2>Современное оборудование</h2>
+        </div>
+        <div class="advantage">
+            <img src="{{ url_for('static', filename='images/doctors.jpg') }}" alt="" class="advantage-img">
+            <h2>Опытные специалисты</h2>
+        </div>
+        <div class="advantage">
+            <img src="{{ url_for('static', filename='images/online.jpg') }}" alt="" class="advantage-img">
+            <h2>Онлайн-запись</h2>
+        </div>
+        <div class="advantage">
+            <img src="{{ url_for('static', filename='images/individual.jpg') }}" alt="" class="advantage-img">
+            <h2>Индивидуальный подход</h2>
+        </div>
+        <div class="advantage">
+            <img src="{{ url_for('static', filename='images/Clinic index.jpeg') }}" alt="" class="advantage-img">
+            <h2>Множество филиалов</h2>
+        </div>
+        <div class="advantage">
+            <img src="{{ url_for('static', filename='images/comfortable-cabinets.png') }}" alt="" class="advantage-img">
+            <h2>Комфортные кабинеты</h2>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block news %}
+<h1 class="main-h1" id="news">Последние новости</h1>
+
+{% if posts %}
+    {% for post in posts %}
+    
+        <div class="full-news">
+            <div class="index-news">
+                <a href="{{ url_for('post_detail', post_id=post.id) }}"><h2>{{ post.title }}</h2></a>
+                <a href="{{ url_for('post_detail', post_id=post.id) }}"><p>{{ post.content[:400] }}...</p></a>
+                <a href="{{ url_for('post_detail', post_id=post.id) }}">Читать</a>
+                
+                
+            </div>
+            {% if post.image %}
+                <div class="div-index-post-image">
+                    <img src="{{ url_for('static', filename='uploads/' + post.image) }}" class="index-post-image">
+                </div>
+            {% endif %}
+            
+        </div>
+        <hr>
+        
+        
+    {% endfor %}
+    <a href="{{ url_for('posts') }}" class="see-all">Все новости</a>
+{% else %}
+    <p class="index-news-p">Пока нет новостей</p>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Healthy | Добавление врача{% endblock %}
+
+{% block content_class %}content_form{% endblock %}
+{% block content %}
+
+<div class="form-container">
+    <h1 class="top_form">Добавление врача</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="form_field">
+            {{ form.first_name.label }}
+            {{ form.first_name(class="form-input", placeholder="Имя") }}
+        </div>
+
+        <div class="form_field">
+            {{ form.last_name.label }}
+            {{ form.last_name(class="form-input", placeholder="Фамилия") }}
+        </div>
+
+        <div class="form_field">
+            {{ form.patronymic.label }}
+            {{ form.patronymic(class="form-input", placeholder="Отчество") }}
+        </div>
+
+        <div class="form_field">
+            {{ form.email.label }}
+            {{ form.email(class="form-input", placeholder="Email") }}
+        </div>
+
+        <div class="form_field">
+            {{ form.password.label }}
+            {{ form.password(class="form-input", placeholder="Пароль") }}
+        </div>
+
+        <div class="form_field">
+            {{ form.specialization.label }}
+            {{ form.specialization(class="form-input", placeholder="Специальность") }}
+        </div>
+
+        <div class="form_field">
+            {{ form.description(class="form-textarea", placeholder="Описание врача") }}
+        </div>
+
+        <div class="form_field">
+            {{ form.photo.label }}
+            {{ form.photo() }}
+        </div>
+
+        <button class="form_btn">Создать</button>
+    </form>
+</div>
+{% endblock %}

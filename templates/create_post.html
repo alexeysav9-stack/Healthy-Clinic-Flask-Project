@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Healthy Clinic | Создание статьи{% endblock %}
+
+{% block content_class %}content_form{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1 class="top_form">Добавление статьи</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <div class="form_field">
+                {{ form.title.label }}
+                {{ form.title(class="form-input", placeholder="Заголовок") }}
+            </div>
+
+            <div class="form_field">
+                {{ form.content.label }}
+                {{ form.content(class="form-input", placeholder="Содержание") }}
+            </div>
+
+            <div class="form_field">
+                {{ form.author_name.label }}
+                {{ form.author_name(class="form-input", placeholder="От имени...") }}
+            </div>
+            <div class="form_field">
+                {{ form.image.label }}
+                {{ form.image(class="form-input", placeholder="Изображение") }}
+            </div>
+
+            
+
+            <button class="form_btn">Создать</button>
+        </form>
+    </div>
+
+{% endblock %}

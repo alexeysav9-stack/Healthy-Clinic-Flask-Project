@@ -1,0 +1,47 @@
+﻿{% extends 'base.html' %}
+
+{% block content_class %}main{% endblock %}
+{% block title %}
+Healthy Clinic | Профиль
+{% endblock %}
+
+
+{% block content %}
+<section class="profile-page">
+    <div class="profile-hero">
+        <h1 class="profile-title">Личный кабинет врача</h1>
+        <p class="profile-subtitle">Управляйте приёмами и расписанием в одном месте</p>
+    </div>
+
+    <div class="profile-layout">
+        <article class="profile-card">
+            <div class="profile-photo-wrap">
+                {% if doctor.photo %}
+                    <img src="{{ url_for('static', filename='uploads/' + doctor.photo) }}" class="profile-photo" alt="Фото врача">
+                {% else %}
+                    <img src="{{ url_for('static', filename='uploads/default.png') }}" class="profile-photo" alt="Фото врача">
+                {% endif %}
+            </div>
+
+            <div class="profile-info">
+                <h2 class="profile-name">{{ doctor.user.last_name }} {{ doctor.user.first_name }} {{ doctor.user.patronymic }}</h2>
+                <p><span>Специализация:</span> {{ doctor.specialization }}</p>
+                <p><span>Описание:</span> {{ doctor.description }}</p>
+                <p><span>Email:</span> {{ doctor.user.email }}</p>
+            </div>
+        </article>
+
+        <div class="profile-actions">
+            <a href="{{ url_for('doctor_appointments') }}" class="profile-action">
+                <h3>Мои записи</h3>
+                <p>Просмотр и управление записями пациентов на приёмы.</p>
+            </a>
+
+            <a href="{{ url_for('create_slot', doctor_id=doctor.id) }}" class="profile-action">
+                <h3>Создать слот</h3>
+                <p>Добавление новых слотов для приёмов.</p>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

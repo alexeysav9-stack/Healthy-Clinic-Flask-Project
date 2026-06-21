@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Healthy Clinic | Admin Panel{% endblock %}
+
+{% block content_class %}admin-content{% endblock %}
+
+{% block content %}
+    <h1>Админ-панель</h1>
+    <p>Здесь вы можете управлять врачами, просматривать записи и выполнять другие административные задачи.</p>
+
+    <div class="panel">
+        <ul>
+            <li><a href="{{ url_for('create_post') }}" class="admin-links">Создание статей</a></li>
+            <li><a href="{{ url_for('create_doctor') }}" class="admin-links">Добавить нового врача</a></li>
+            <li><a href="{{ url_for('create_branch') }}" class="admin-links">Добавить новый филиал</a></li>
+        </ul>
+    </div>
+{% endblock %}

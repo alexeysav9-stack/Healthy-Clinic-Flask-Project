@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Healthy | Запись к врачу{% endblock %}
+
+{% block content_class %}appoinment_form{% endblock %}
+
+{% block content %}
+
+<div class="doc_det_photo_div">
+        {% if doctor.photo %}
+            <img src="{{ url_for('static', filename='uploads/' + doctor.photo) }}" class="det_doc_photo">
+        {% else %}
+            <img src="{{ url_for('static', filename='uploads/default.png') }}" class="det_doc_photo">
+        {% endif %}
+</div>
+<div class="appoint_div">
+
+    <h1>Запись к врачу</h1>
+
+    <h2>
+        {{ doctor.user.last_name }} {{ doctor.user.first_name }} {{ doctor.user.patronymic }}, {{ doctor.specialization }}
+    </h2>
+
+    <form method="POST" class="appoint_form">
+        {{ form.hidden_tag() }}
+        <h3 label for="date">Дата и время приема:</h3>
+        <div class="top-form">
+            <div class="app_date">
+                <p>{{ form.slot.label }}{{ form.slot(class="form-control") }}</p><br>
+            </div>
+        </div>
+        <p>{{ form.comment.label }}<br>{{ form.comment(class="app-textarea", placeholder="Коротко опишите проблему...", rows="3") }}</p>
+
+        <button type="submit" class="btn btn-success">Записаться</button>
+    </form>
+</div>
+
+{% endblock %}

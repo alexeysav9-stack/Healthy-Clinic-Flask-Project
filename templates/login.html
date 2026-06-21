@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Healthy | Вход{% endblock %}
+
+{% block content_class %}content_form{% endblock %}
+{% block content %}
+
+
+<div class="form-container">
+    <h1 class="top_form">Вход</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form_field">
+            {{ form.email.label }}
+            {{ form.email(class="form-input", placeholder="Электронная почта") }}
+        </div>
+        <div class="form_field">
+        {{ form.password.label }}
+        {{ form.password(class="form-input", placeholder="Пароль") }}
+        </div>
+        <div class="checkbox">
+            <p>Запомнить меня</p>
+            {{ form.remember_me() }}
+            {{ form.remember_me.label(class="remember") }}
+        </div>
+
+        <div class="btn_div">
+            {{ form.submit(class="form_btn") }}
+        </div>
+    </form>
+    <div class="log_to_reg">
+        <p>Еще нет аккаунта? <a href="/register">Зарегестрироваться.</a></p>
+    </div>
+</div>
+
+{% endblock %}

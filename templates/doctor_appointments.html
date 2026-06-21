@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Healthy | Записи{% endblock %}
+
+{% block content_class %}appoinments{% endblock %}
+
+{% block content %}
+<h1>Мои записи</h1>
+
+<p>
+  <strong>Врач:</strong>
+  {{ doctor.user.first_name }} {{ doctor.user.last_name }}
+</p>
+
+<table class="appointments-table">
+  <thead>
+    <tr>
+      <th>Пациент</th>
+      <th>Дата</th>
+      <th>Время</th>
+      <th>Комментарий</th>
+      <th>Статус</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for a in appointments %}
+    <tr>
+        <td>{{ a.patient.first_name }} {{ a.patient.last_name }}</td>
+        <td>{{ a.date }}</td>
+        <td>{{ a.time.strftime('%H:%M') }}</td>
+        <td>{{ a.comment or '-' }}</td>
+
+        <td class="status {{ a.status }}">
+        
+            {% if a.status == 'pending' %}
+                Ожидает
+            {% elif a.status == 'approved' %}
+                Подтверждена
+            {% elif a.status == 'rejected' %}
+                Отклонена
+            {% else %}
+                {{ a.status }}
+            {% endif %}
+        </td>
+
+      <td>
+        {% if a.status == 'pending' %}
+          <a href="{{ url_for('approve_appointment', id=a.id) }}" class="btn approve">
+            ✔ Подтвердить
+          </a>
+          <a href="{{ url_for('reject_appointment', id=a.id) }}" class="btn btn-danger reject">
+            ✖ Отклонить
+          </a>
+        {% endif %}
+
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

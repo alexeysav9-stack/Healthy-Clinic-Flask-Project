@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Healthy Clinic | Создание статьи{% endblock %}
+
+{% block content_class %}content_form{% endblock %}
+
+{% block content %}
+
+    <div class="form-container">
+        <h1 class="top_form">Добавление филиала</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <div class="form_field">
+                {{ form.name.label }}
+                {{ form.name(class="form-input", placeholder="Название филиала") }}
+            </div>
+            <div class="form_field">
+                {{ form.address.label }}
+                {{ form.address(class="form-input", placeholder="Адрес") }}
+            </div>
+            <div class="form_field">
+                {{ form.phone_number.label }}
+                {{ form.phone_number(class="form-input", placeholder="Номер телефона") }}
+            </div>
+            <div class="form_field">
+                {{ form.email.label }}
+                {{ form.email(class="form-input", placeholder="Электронная почта") }}   
+            </div>
+            <div class="form_field">
+                {{ form.working_hours.label }}
+                {{ form.working_hours(class="form-input", placeholder="Рабочие часы") }}
+            </div>
+            <div class="form_field">
+                {{ form.branch_photo.label }}
+                {{ form.branch_photo(class="form-input", placeholder="Фото филиала") }}
+            </div>
+            <div class="form_field">
+                <button class="form_btn">Добавить филиал</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

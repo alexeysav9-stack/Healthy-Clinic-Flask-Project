@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content_class %}content_form{% endblock %}
+{% block title %}Healthy | Создание слота{% endblock %}
+
+{% block content %}
+
+<h1>Создание слота</h1>
+<div class="form-container slot-form">
+    <form method="POST">
+
+        {{ form.hidden_tag() }}
+
+        <div class="form_field create-slot-field">
+            {{ form.date.label }}
+            {{ form.date(class="form-control") }}
+        </div>
+
+        <div class="form_field create-slot-field">
+            {{ form.time.label }}
+            {{ form.time(class="form-control") }}
+        </div>
+
+        <div class="form_field create-slot-field">
+            {{ form.submit(class="btn form_btn") }}
+        </div>
+
+    </form>
+</div>
+{% endblock %}

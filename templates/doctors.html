@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Healthy | Врачи{% endblock %}
+
+{% block content %}
+<div class="doctors_container">
+    <h1>Наши врачи</h1>
+    <div class="doctors_grid">
+        {% for doctor in doctors %}
+            <div class="doctor_card">
+                {% if doctor.photo %}
+                    <img src="{{ url_for('static', filename='uploads/' + doctor.photo) }}" class="doctor_photo">
+                {% else %}
+                    <img src="{{ url_for('static', filename='uploads/default.png') }}" class="doctor_photo">
+                {% endif %}
+                <h3>
+                    {{ doctor.user.last_name }} 
+                    {{ doctor.user.first_name }} 
+                    {{ doctor.user.patronymic }}
+                </h3>
+                <p class="specialization">
+                    {{ doctor.specialization }}
+                </p>
+                <a href="{{ url_for('doctor_detail', doctor_id=doctor.id) }}" class="btn btn-info">
+                Подробнее
+                </a>
+                <a href="{{ url_for('book_appointment', doctor_id=doctor.id) }}" class="btn btn-info">
+                    Записаться
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
