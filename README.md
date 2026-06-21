@@ -47,6 +47,14 @@
 ### Админ-панель
 <img width="1903" height="1180" alt="изображение" src="https://github.com/user-attachments/assets/645d070c-ce39-49ff-80a1-9b570dac2731" />
 
+### О нас
+<img width="1903" height="2106" alt="изображение" src="https://github.com/user-attachments/assets/060c5e6e-6358-4273-a00e-15b3429d65a1" />
+
+
+### Контакты
+<img width="1903" height="1180" alt="изображение" src="https://github.com/user-attachments/assets/fe0d4689-b82d-45d0-84c1-5990dc00c126" />
+
+
 
 ## Установка и запуск
 
