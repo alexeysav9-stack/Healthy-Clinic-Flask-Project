@@ -2,26 +2,31 @@
 
 {% block title %}Healthy Clinic | {{ post.title }}{% endblock %}
 
-{% block content_class %}post-content{% endblock %}
+{% block content_class %}post-content article-page{% endblock %}
 
 {% block content %}
-    {% if post.image %}
-        <div class="div-post-image">
-            <img src="{{ url_for('static', filename='uploads/' + post.image) }}" class="post-image">
+    <article class="article-container">
+        <div class="article-back-wrap">
+            <a href="{{ url_for('posts') }}" class="article-back-link">← Все статьи</a>
         </div>
-    {% endif %}
-    <div class="post-text">
-        <div class="post-info">
-            <p>Автор: {{ post.author_name }}</p>
-            <p>Дата публикации: {{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+
+        <div class="article-header">
+            <div class="article-meta">
+                <span class="article-author">Автор: {{ post.author_name or 'Администрация' }}</span>
+                <span class="article-date">Дата публикации: {{ post.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+            </div>
+            
+            <h1 class="article-title" title="{{ post.title }}">{{ post.title }}</h1>
         </div>
-        
-        <div class="post-title">
-            <h1>{{ post.title }}</h1>
-        </div>
-        <div class="post-p">
+
+        {% if post.image %}
+            <div class="article-image-wrap">
+                <img src="{{ url_for('static', filename='uploads/' + post.image) }}" class="article-image" alt="{{ post.title }}">
+            </div>
+        {% endif %}
+
+        <div class="article-body">
             <p>{{ post.content }}</p>
         </div>
-    </div>
-    
+    </article>
 {% endblock %}
